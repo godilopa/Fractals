@@ -4,7 +4,7 @@
     {
       "label": "Build fractal",
       "type": "shell",
-      "command": "g++  -I ${workspaceFolder}\\Header  -g ${workspaceFolder}\\Source\\Fractal.cpp -o fractal",
+      "command": "g++  -std=c++11 -Wall -I ${workspaceFolder}\\Header  -g ${workspaceFolder}\\Source\\Fractal.cpp -o fractal",
       "args": [],
       "group": {
         "kind": "build",
