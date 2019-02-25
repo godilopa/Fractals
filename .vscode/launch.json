@@ -5,7 +5,7 @@
       "name": "Launch",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/fravtal.exe",
+      "program": "${workspaceFolder}/fractal.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -20,7 +20,7 @@
           "ignoreFailures": true
         }
       ],
-      "preLaunchTask": "build hello world"
+      "preLaunchTask": "Build fractal"
     }
   ]
 }
