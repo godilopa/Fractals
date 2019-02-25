@@ -13,7 +13,8 @@ public:
   virtual ~Bitmap();
 
 private:
-  unique_ptr<unsigned char[]> m_pPixels{nullptr};
+  // unique_ptr<unsigned char[]> m_pPixels{};
+  unsigned char *m_pPixels;
   int m_width{0};
   int m_height{0};
 };

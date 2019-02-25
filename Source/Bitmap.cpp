@@ -2,9 +2,21 @@
 #include <BitmapFileHeader.h>
 #include <BitmapInfoHeader.h>
 
-Bitmap::Bitmap(int width, int height) : m_width(width), m_height(height), m_pPixels(new unsigned char[width * height * 3]{0}) {}
+#include <fstream>
+#include <iostream>
 
-Bitmap::~Bitmap() {}
+using namespace std;
+
+Bitmap::Bitmap(int width, int height)
+{
+  m_width = width;
+  m_height = height;
+  m_pPixels = new unsigned char[width * height * 3];
+}
+
+Bitmap::~Bitmap()
+{
+}
 
 bool Bitmap::Write(string filename)
 {
@@ -16,6 +28,22 @@ bool Bitmap::Write(string filename)
 
   infoHeader.width = m_width;
   infoHeader.height = m_height;
+
+  fstream file;
+
+  file.open(filename, ios::out | ios::binary);
+
+  if (!file)
+    return false;
+
+  file.write(reinterpret_cast<char *>(&fileHeader), sizeof(fileHeader));
+  file.write(reinterpret_cast<char *>(&infoHeader), sizeof(infoHeader));
+  file.write(reinterpret_cast<char *>(m_pPixels), m_width * m_height * 3);
+
+  file.close();
+
+  if (!file)
+    return false;
 
   return false;
 }
