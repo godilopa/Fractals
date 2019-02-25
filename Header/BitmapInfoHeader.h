@@ -2,7 +2,7 @@
 #define BITMAPINFOHEADER_H
 
 //#include <cstint>;//para hacerlo independiente de la plataforma, asegurar los 32 bits, no incluida en MinGw
-#pragma pack(2)
+#pragma pack(push, 2)
 
 struct BitMapInfoHeader
 {
@@ -18,5 +18,7 @@ struct BitMapInfoHeader
   int colors{0};
   int importantColors{0};
 };
+
+#pragma pack(pop)
 
 #endif

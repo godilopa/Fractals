@@ -7,11 +7,10 @@
 
 using namespace std;
 
-Bitmap::Bitmap(int width, int height)
+Bitmap::Bitmap(int width, int height) : m_pPixels(new unsigned char[width * height * 3])
 {
   m_width = width;
   m_height = height;
-  m_pPixels = new unsigned char[width * height * 3];
 }
 
 Bitmap::~Bitmap()
@@ -23,8 +22,8 @@ bool Bitmap::Write(string filename)
   BitMapHeader fileHeader;
   BitMapInfoHeader infoHeader;
 
-  fileHeader.fileSize = sizeof(fileHeader) + sizeof(infoHeader) + m_width * m_height * 3;
-  fileHeader.dataOffset = sizeof(fileHeader) + sizeof(infoHeader);
+  fileHeader.fileSize = sizeof(BitMapHeader) + sizeof(BitMapInfoHeader) + m_width * m_height * 3;
+  fileHeader.dataOffset = sizeof(BitMapHeader) + sizeof(BitMapInfoHeader);
 
   infoHeader.width = m_width;
   infoHeader.height = m_height;
@@ -36,16 +35,16 @@ bool Bitmap::Write(string filename)
   if (!file)
     return false;
 
-  file.write(reinterpret_cast<char *>(&fileHeader), sizeof(fileHeader));
-  file.write(reinterpret_cast<char *>(&infoHeader), sizeof(infoHeader));
-  file.write(reinterpret_cast<char *>(m_pPixels), m_width * m_height * 3);
+  file.write((char *)&fileHeader, sizeof(fileHeader));
+  file.write((char *)&infoHeader, sizeof(infoHeader));
+  file.write((char *)m_pPixels.get(), m_width * m_height * 3);
 
   file.close();
 
   if (!file)
     return false;
 
-  return false;
+  return true;
 }
 
 void Bitmap::SetPixel(int x, int y, unsigned char r, unsigned char g, unsigned char b)

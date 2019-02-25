@@ -2,6 +2,7 @@
 #define BITMAP_H
 
 #include <string>
+#include <memory>
 using namespace std;
 
 class Bitmap
@@ -13,8 +14,7 @@ public:
   virtual ~Bitmap();
 
 private:
-  // unique_ptr<unsigned char[]> m_pPixels{};
-  unsigned char *m_pPixels;
+  unique_ptr<unsigned char[]> m_pPixels{nullptr};
   int m_width{0};
   int m_height{0};
 };

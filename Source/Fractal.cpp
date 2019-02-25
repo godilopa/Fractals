@@ -7,8 +7,8 @@ using namespace std;
 
 int main()
 {
-  Bitmap bitmap(100, 200);
+  Bitmap bitmap(800, 600);
   bitmap.Write("Prueba.bmp");
-  //cout << "Hello world" << endl;
+  cout << sizeof(short int) << endl;
   return 0;
 }
