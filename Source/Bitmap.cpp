@@ -49,4 +49,9 @@ bool Bitmap::Write(string filename)
 
 void Bitmap::SetPixel(int x, int y, unsigned char r, unsigned char g, unsigned char b)
 {
+  unsigned char *pPixel = m_pPixels.get();
+  pPixel += 3 * (y * m_width + x);
+  pPixel[0] = b;
+  pPixel[1] = g;
+  pPixel[2] = r;
 }
